@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saraswati Puja 2026 | Divine Celebration</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="loader-wrapper" id="loader">
+        <div class="loader"></div>
+        <p style="font-family: 'Marcellus', serif; color: #ff9933; letter-spacing: 2px;">ॐ ऐं सरस्वत्यै नमः</p>
+    </div>
+
+    <!-- Animated Background Orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <div class="background-animation" id="petals-container"></div>
+
+    <main>
+        <header>
+            <h1 class="fade-in" style="animation-delay: 0.2s;">वसन्त पञ्चमी</h1>
+            <p class="subtitle fade-in" style="animation-delay: 0.4s;">Saraswati Puja Special</p>
+        </header>
+
+        <section class="hero-image-container fade-in" style="animation-delay: 0.6s;">
+            <div class="main-image-wrapper">
+                <img src="assets/images/saraswati_new.jpg" alt="Saraswati Maa" id="featured-image" class="featured-img">
+                <div class="image-overlay"></div>
+            </div>
+        </section>
+
+        <section class="shloka-section fade-in" style="animation-delay: 0.8s;">
+            <div class="shloka-card">
+                <p class="shloka-hindi">
+                    या कुन्देन्दुतुषारहारधवला या शुभ्रवस्त्रावृता<br>
+                    या वीणावरदण्डमण्डितकरा या श्वेतपद्मासना।
+                </p>
+                <div class="divider"></div>
+                <p style="color: #888; font-size: 0.9rem;">विद्या की देवी माँ सरस्वती आप पर अपनी कृपा बनाये रखें।</p>
+            </div>
+        </section>
+
+        <section class="gallery-section fade-in" style="animation-delay: 1s;">
+            <div class="gallery-grid">
+                <div class="gallery-item active"><img src="assets/images/saraswati_new.jpg"
+                        onclick="changeImage(this, this.src)" alt="1"></div>
+                <div class="gallery-item"><img src="assets/images/saraswati2.png" onclick="changeImage(this, this.src)"
+                        alt="2"></div>
+                <div class="gallery-item"><img src="assets/images/saraswati3.png" onclick="changeImage(this, this.src)"
+                        alt="3"></div>
+                <div class="gallery-item"><img src="assets/images/saraswati4.png" onclick="changeImage(this, this.src)"
+                        alt="4"></div>
+                <div class="gallery-item"><img src="assets/images/saraswati5.png" onclick="changeImage(this, this.src)"
+                        alt="5"></div>
+            </div>
+        </section>
+
+        <div class="music-player">
+            <div class="music-info" style="display: flex; align-items: center; gap: 12px;">
+                <div class="music-icon-wrapper">
+                    <span style="z-index: 2;">🕉️</span>
+                    <div class="music-wave" id="wave-anim" style="display: none;"></div>
+                </div>
+                <div class="music-text">
+                    <span style="font-weight: 600; font-size: 0.9rem;">Divine Vandana</span>
+                    <span class="playing-status" style="font-size: 0.7rem; color: #888;">YouTube Audio Link</span>
+                </div>
+            </div>
+
+            <div id="youtube-player" style="display:none;"></div>
+            <button id="play-btn" class="play-button">▶</button>
+        </div>
+
+        <footer style="text-align: center; margin-top: 40px;">
+            <button class="status-btn" onclick="shareStatus()">Update WhatsApp Status</button>
+            <p style="margin-top: 15px; font-size: 0.7rem; color: #bbb;">Vasant Panchami Celebration 2026</p>
+        </footer>
+    </main>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
