@@ -1,12 +1,17 @@
 window.addEventListener('load', () => {
+    createPetals();
+});
+
+function startExperience() {
     const loader = document.getElementById('loader');
     loader.style.opacity = '0';
     setTimeout(() => {
         loader.style.display = 'none';
+        if (player && player.playVideo) {
+            player.playVideo();
+        }
     }, 800);
-
-    createPetals();
-});
+}
 
 function createPetals() {
     const container = document.getElementById('petals-container');
@@ -73,15 +78,9 @@ function onYouTubeIframeAPIReady() {
             'mute': 0
         },
         events: {
-            'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
         }
     });
-}
-
-function onPlayerReady(event) {
-    // Try to play immediately, might be blocked by browser
-    event.target.playVideo();
 }
 
 function onPlayerStateChange(event) {
