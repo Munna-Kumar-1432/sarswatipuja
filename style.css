@@ -11,6 +11,28 @@
     --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
 }
 
+.highlight-name {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    text-shadow: 0 5px 15px rgba(183, 143, 62, 0.2);
+    display: inline-block;
+    animation: pulseName 2s infinite alternate;
+}
+
+@keyframes pulseName {
+    from {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    to {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
