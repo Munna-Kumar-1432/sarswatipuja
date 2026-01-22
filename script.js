@@ -1,40 +1,31 @@
 window.addEventListener('load', () => {
     createPetals();
+    // In case user doesn't see anything, try to auto-hide loading symptoms
+    const main = document.querySelector('main');
+    if (main) main.style.opacity = '1';
 });
-
-function startExperience() {
-    const loader = document.getElementById('loader');
-    loader.style.opacity = '0';
-    setTimeout(() => {
-        loader.style.display = 'none';
-        if (player && player.playVideo) {
-            player.playVideo();
-        }
-    }, 800);
-}
 
 function createPetals() {
     const container = document.getElementById('petals-container');
-    const petalCount = 40;
+    const petalCount = 50;
 
     for (let i = 0; i < petalCount; i++) {
         const petal = document.createElement('div');
         petal.className = 'petal';
 
-        const size = Math.random() * 12 + 8;
+        const size = Math.random() * 15 + 10;
         const left = Math.random() * 100;
-        const delay = Math.random() * 8;
-        const duration = Math.random() * 4 + 6;
+        const delay = Math.random() * 10;
+        const duration = Math.random() * 5 + 7;
 
         petal.style.width = `${size}px`;
-        petal.style.height = `${size * 1.4}px`;
+        petal.style.height = `${size * 1.5}px`;
         petal.style.left = `${left}%`;
         petal.style.animationDelay = `${delay}s`;
         petal.style.animationDuration = `${duration}s`;
 
-        const colors = ['#fffb00', '#ffeb3b', '#ffc107', '#ff9933'];
+        const colors = ['#fffb00', '#ff9933', '#ffd54f', '#ffeb3b'];
         petal.style.background = colors[Math.floor(Math.random() * colors.length)];
-        petal.style.opacity = Math.random() * 0.4 + 0.3;
 
         container.appendChild(petal);
     }
@@ -47,8 +38,8 @@ function changeImage(element, src) {
     items.forEach(item => item.classList.remove('active'));
     element.parentElement.classList.add('active');
 
-    mainImg.style.transform = 'scale(0.95)';
     mainImg.style.opacity = '0';
+    mainImg.style.transform = 'scale(0.95)';
 
     setTimeout(() => {
         mainImg.src = src;
@@ -78,22 +69,28 @@ function onYouTubeIframeAPIReady() {
             'mute': 0
         },
         events: {
-            'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange,
+            'onReady': onPlayerReady
         }
     });
+}
+
+function onPlayerReady(event) {
+    // Attempt autoplay, though browsers often block it
+    event.target.playVideo();
 }
 
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING) {
         isPlaying = true;
         playBtn.textContent = '⏸';
-        statusText.textContent = 'Vandana Playing...';
-        wave.style.display = 'block';
+        statusText.textContent = 'Playing Vandana...';
+        if (wave) wave.style.display = 'block';
     } else {
         isPlaying = false;
         playBtn.textContent = '▶';
         statusText.textContent = 'Music Paused';
-        wave.style.display = 'none';
+        if (wave) wave.style.display = 'none';
     }
 }
 
@@ -107,20 +104,21 @@ playBtn.addEventListener('click', () => {
     }
 });
 
+// Added a global click listener to trigger music if autoplay was blocked
+document.body.addEventListener('click', () => {
+    if (player && player.getPlayerState() !== YT.PlayerState.PLAYING) {
+        player.playVideo();
+    }
+}, { once: true });
+
 function shareStatus() {
     if (navigator.share) {
         navigator.share({
             title: 'Happy Vasant Panchami',
-            text: 'Maa Saraswati ki kripa aap par bani rahe! 🙏🌼 Check this divine celebration:',
+            text: 'Maa Saraswati blessings! 🙏🌼',
             url: window.location.href
         });
     } else {
-        const dummy = document.createElement('input');
-        document.body.appendChild(dummy);
-        dummy.value = window.location.href;
-        dummy.select();
-        document.execCommand('copy');
-        document.body.removeChild(dummy);
-        alert('Website Link Copied! Ab aap ise WhatsApp Status par laga sakte hain.');
+        alert('Link copied to clipboard for Status!');
     }
 }
